@@ -49,15 +49,18 @@ join orders where customers.customer_id=orders.customer_id and customers.custome
 select customers.customer_id,customers.customer_name,orders.product_name from customers
  left join orders on  customers.customer_id=orders.customer_id where product_name is not  null;
 insert into orders values(106,11,"ice_cream");
+
 -- right join- in this type of join we will get whole datat of the right table and the matching column from the left table
 select customers.customer_id,customers.customer_name,orders.product_name from customers
  right join orders on  customers.customer_id=orders.customer_id ;
+ 
 -- natural join-acts as an ineer join based on the comman column name,if their is no  common column it works as cross join,and if we have more than 
 -- one common column it filter out on the basis of all the columns
 select customers.customer_id,customers.customer_name,orders.product_name from customers
 natural join orders; -- inner join ki tarah 
 
--- self join 
+-- self join -a table which joiin with itself
+
 
 
  
