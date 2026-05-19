@@ -96,6 +96,8 @@ select * from employees where department in(select dept_name from department whe
 -- select * from table where salary(
 -- select avg(salary) from table where department=outer.department)
 
+
+
 -- find out the employee 
 select * From employees;
 select * from employees as e where salary>(select avg(salary) from employees where department=e.department);
@@ -109,7 +111,8 @@ select * from employees as e where salary=(select max(salary) from employees whe
 select distinct department from employees as e where
 70000<all(select salary from employees where department=e.department);
 
--- 
+
+
 
 
 

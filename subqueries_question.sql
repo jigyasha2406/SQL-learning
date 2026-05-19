@@ -59,5 +59,17 @@ select * from customers where customer_id in(select distinct customer_id from or
 select * from orders where product_id not in (select product_id from products);
 -- Customers with above average credit limit
 select * from customers where credit_limit>(select avg(credit_limit) from customers);
+-- Question 4: Find the most expensive product.
+select * from products where price=(select max(price) from products);
+-- Question 5: Find orders where the product's price is above 10000.
+select * from orders where product_Id in (select product_id from products where price>10000);
+-- Question 6: Find customers who have placed more than 2 orders.
+select * from customers where customer_id in (select customer_id from orders group by customer_id having count(customer_id)>2);
+-- Question 7: Find all 'Delivered' orders where the product belongs to the 'Electronics' category.
+select * from orders where status="Delivered" and product_id in (select product_id from products where category="Electronics");
+-- Question 8: Find the customer who placed the maximum number of orders.
+select * from orders;
+select count(customer_id) from orders group by customer_id;
+
 
  
