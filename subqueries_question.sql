@@ -70,6 +70,30 @@ select * from orders where status="Delivered" and product_id in (select product_
 -- Question 8: Find the customer who placed the maximum number of orders.
 select * from orders;
 select count(customer_id) from orders group by customer_id;
+-- Find products whose price is greater than ALL products in the 'Stationery' category.
+select product_name,price from products where price>all(select price from products where category="stationery");
+-- Customers with no cancelled orders
+select customer_name from customers where customer_id not in (select customer_id From orders where status="cancelled");
+-- Orders placed by Delhi customers
+select customer_id , count(order_id) from orders where customer_id in (select customer_id from customers where city="delhi")
+group by customer_id;
+-- Products ordered with quantity > 3 at least once
+select product_name from products where product_id in (select product_id from orders where quantity>3);
+-- Customers with credit limit less than Ravi Kumar's
+select customer_name,credit_limit from customers where credit_limit<(select credit_limit from customers where customer_name="Ravi kumar");
+-- Customers who ordered Furniture products
+select customer_name from customers where customer_id in (select customer_id from orders where product_id=(select product_id from products where category="furniture"));
+-- Second most expensive product
+select product_name,price from products where price=(select max(price) from products where price<(select max(price) from products));
+-- Customers with no orders (NOT EXISTS)
+select customer_name,customer_id from customers c where not exists(select 1  from orders o where o.customer_id=c.customer_id);
+-- Products ordered more than average total quantity
+select product_name from products where product_id in (select product_id from orders where quantity>(select avg(quantity) from orders));
+-- Orders with quantity above average for that product (Correlated)
+select o1.order_id,o1.product_id from orders o1 where o1.quantity>(select avg(o2.quantity) from orders as o2 where o2.product_id=o1.product_id);
+select * from orders;
+-- Customers who ordered all products priced above 10000
+select customer_name from customers where customer_id in (select customer_id from orders where product_id in (select product_id from products where price<10000));
 
 
  

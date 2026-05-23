@@ -62,3 +62,5 @@ ON e.manager_id = m.emp_id;
 select * from employe;
 
 
+
+

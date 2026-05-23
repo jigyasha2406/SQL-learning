@@ -114,3 +114,4 @@ select * ,dense_rank() over(order by salary) as rnk from employees) as temp
 where rnk=4 ;
 
 select *,dense_rank() over(order by salary) from employees;
+
