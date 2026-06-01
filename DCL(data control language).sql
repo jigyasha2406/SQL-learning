@@ -32,22 +32,32 @@ revoke update on  testdb4.emp3 from 'ishan'@'%';
 revoke select on testdb4.emp from "ishan"@"%";
 revoke insert on testdb4.emp from "ishan"@"%";
 
--- create 3 users and a create a group (roll) name sales 
-create user rahul identified by "123";
-create user ajay identified by "123";
-create user neha identified by "123";
+-- create 3 user and a rool of then 
+create user "ajay" identified by "123";
+create user "neha" identified by "123";
+create user "rahul" identified by "123";
 
--- select insert update all
+-- create a role 
+create role sale;
 
--- add new user to 
--- login to this user and check the permissinon are granted or not
+-- grant the priveledges to the role
+grant select,update,insert on testdb4.* to sale;
+-- grant the role to the different users
+grant sale to rahul;
+grant sale to ajay;
+grant sale to neha;
+-- set the role to the user
+set default role sale to ajay;
+set default role sale to rahul;
+set default role sale to neha;
+-- verifying the access 
+show grants for ajay;
+show grants for neha;
+-- revoke priveldge from on user
+revoke sale from "ajay"@"%";
 
 
 
 
 
-SELECT user, host 
-FROM mysql.user
-WHERE user = 'ishan';
-
--- solve 25 question on group by having and inner join 
+SELECT user, host FROM mysql.user WHERE user = 'ajay';
