@@ -27,4 +27,14 @@ select  sum(moviescount) from  test where actor_id>10;
   (select  dept  , max(salary) as deptmax from  employees group by dept)
   select * from  employees join xyz where employees.salary = xyz.deptmax and employees.dept = xyz.dept;
   
-use sha
+use sakila;
+
+
+WITH cte AS (
+    SELECT actor_id,
+           COUNT(film_id) AS movie_count
+    FROM film_actor
+    GROUP BY actor_id
+)
+
+select * From cte where actor_id>10;

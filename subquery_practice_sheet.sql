@@ -221,3 +221,19 @@ WHERE c.customer_id <> 201
 select * from employees;
 select department,sum(salary) as total_sal from employees group by department 
 having sum(salary)>(select min(dept_total) from (select sum(salary) as dept_total from employees group by department) as dept_totals);
+
+select * from employees;
+
+with cte as
+(select * from employees) select * from cte;
+
+select * from cte;
+
+
+with cte as (select emp_name,department from employees) select * from cte;
+
+
+
+
+
+ 
